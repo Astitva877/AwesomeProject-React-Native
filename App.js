@@ -43,6 +43,7 @@ import PasswordInputText from 'react-native-hide-show-password-input';
 import RoundButton from './src/assets/RoundButton';
 import EditText from './src/assets/EditText';
 import PropTypes from 'prop-types';
+import SocialIcon from './src/assets/SocialIcon';
 
 // const App = () => {
 //   const [text, onChangeText] = React.useState("Useless Text");
@@ -475,6 +476,15 @@ const App = () => {
   const image = {
     uri: 'https://i2.wp.com/files.123freevectors.com/wp-content/original/153532-abstract-black-blue-and-purple-background-design.jpg?w=800&q=95',
   };
+  const twitter = {
+    uri: 'https://help.twitter.com/content/dam/help-twitter/brand/logo.png',
+  };
+  const fb = {
+    uri: 'https://parentzone.org.uk/sites/default/files/Instagram%20logo_0.jpg',
+  };
+  const insta = {
+    uri: 'https://www.facebook.com/images/fb_icon_325x325.png',
+  };
   return (
     <ImageBackground source={image} style={styles.image}>
       <View style={styles.container}>
@@ -519,7 +529,7 @@ const App = () => {
           content="Submit"
         />
         <View style={styles.icondesign}>
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <Image
               source={{
                 uri: 'https://help.twitter.com/content/dam/help-twitter/brand/logo.png',
@@ -542,7 +552,10 @@ const App = () => {
               }}
               style={styles.buttonImageIconStyle}
             />
-          </TouchableOpacity>
+          </TouchableOpacity>  */}
+          <SocialIcon icon={twitter} />
+          <SocialIcon icon={insta} />
+          <SocialIcon icon={fb} />
         </View>
       </View>
     </ImageBackground>
@@ -568,35 +581,35 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     // elevation: 1,
   },
-  border: {
-    fontSize: 18,
-    color: 'black',
-    fontWeight: 'bold',
-  },
+  // border: {
+  //   fontSize: 18,
+  //   color: 'black',
+  //   fontWeight: 'bold',
+  // },
   form: {
     fontSize: 25,
     fontWeight: 'bold',
     color: 'black',
   },
-  set: {
-    width: '90%',
-    // borderWidth: 1,
-    // borderColor: 'black',
-    borderBottomWidth: 1,
-  },
-  appButtonContainer: {
-    backgroundColor: 'cyan',
-    borderRadius: 40,
-    width: '40%',
-    height: '8%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  appButtonText: {
-    fontSize: 12,
-    color: 'black',
-    fontWeight: 'bold',
-  },
+  // set: {
+  //   width: '90%',
+  //   // borderWidth: 1,
+  //   // borderColor: 'black',
+  //   borderBottomWidth: 1,
+  // },
+  // appButtonContainer: {
+  //   backgroundColor: 'cyan',
+  //   borderRadius: 40,
+  //   width: '40%',
+  //   height: '8%',
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  // },
+  // appButtonText: {
+  //   fontSize: 12,
+  //   color: 'black',
+  //   fontWeight: 'bold',
+  // },
   text: {
     color: 'white',
     fontSize: 30,
@@ -605,12 +618,12 @@ const styles = StyleSheet.create({
   icondesign: {
     flexDirection: 'row',
   },
-  buttonImageIconStyle: {
-    marginHorizontal: 10,
-    height: 25,
-    width: 25,
-    borderRadius: 10,
-  },
+  // buttonImageIconStyle: {
+  //   marginHorizontal: 10,
+  //   height: 25,
+  //   width: 25,
+  //   borderRadius: 10,
+  // },
   locationimage: {
     height: 80,
     width: 80,
