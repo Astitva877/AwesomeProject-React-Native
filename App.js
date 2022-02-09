@@ -25,11 +25,11 @@ import {
   TextPropTypes,
   Modal,
   Linking,
+  FlatList,
 } from 'react-native';
 // import { CheckBoxProps} from '@react-native-community/checkbox';
 import {Icon} from 'react-native-elements';
 // import Modal from 'react-native-modal';
-// import React, { Component } from 'react';
 import {Constants} from 'expo';
 import {
   Colors, // jbhkjhbkj
@@ -43,7 +43,8 @@ import PasswordInputText from 'react-native-hide-show-password-input';
 import RoundButton from './src/assets/RoundButton';
 import EditText from './src/assets/EditText';
 import PropTypes from 'prop-types';
-import SocialIcon from './src/assets/SocialIcon';
+import SocialIcon from './src/assets/SocialIcon'; 
+import {NavigationContainer} from '@react-navigation/native';
 
 // const App = () => {
 //   const [text, onChangeText] = React.useState("Useless Text");
@@ -469,165 +470,229 @@ import SocialIcon from './src/assets/SocialIcon';
 
 // export default App;
 
-const App = () => {
-  const [userText, onChangeUserText] = useState('');
-  const [useremail, onChangeEmail] = useState('');
-  const [userpassword, onChangePassword] = useState('');
-  const image = {
-    uri: 'https://i2.wp.com/files.123freevectors.com/wp-content/original/153532-abstract-black-blue-and-purple-background-design.jpg?w=800&q=95',
-  };
-  const twitter = {
-    uri: 'https://help.twitter.com/content/dam/help-twitter/brand/logo.png',
-  };
-  const fb = {
-    uri: 'https://parentzone.org.uk/sites/default/files/Instagram%20logo_0.jpg',
-  };
-  const insta = {
-    uri: 'https://www.facebook.com/images/fb_icon_325x325.png',
-  };
-  return (
-    <ImageBackground source={image} style={styles.image}>
-      <View style={styles.container}>
-        <Image
-          source={{
-            uri: 'https://img.lovepik.com/freepng/21/67/26/35q58PICcu33q58PICcexzs758PIC_PIC2018.png_wh300.png',
-          }}
-          style={styles.locationimage}
-        />
-        <Text style={styles.text}>Vision Go</Text>
-      </View>
+// const App = () => {
+//   const [userText, onChangeUserText] = useState('');
+//   const [useremail, onChangeEmail] = useState('');
+//   const [userpassword, onChangePassword] = useState('');
+//   const image = {
+//     uri: 'https://i2.wp.com/files.123freevectors.com/wp-content/original/153532-abstract-black-blue-and-purple-background-design.jpg?w=800&q=95',
+//   };
+//   const twitter = {
+//     uri: 'https://help.twitter.com/content/dam/help-twitter/brand/logo.png',
+//   };
+//   const fb = {
+//     uri: 'https://parentzone.org.uk/sites/default/files/Instagram%20logo_0.jpg',
+//   };
+//   const insta = {
+//     uri: 'https://www.facebook.com/images/fb_icon_325x325.png',
+//   };
+//   return (
+//     <ImageBackground source={image} style={styles.image}>
+//       <View style={styles.container}>
+//         <Image
+//           source={{
+//             uri: 'https://img.lovepik.com/freepng/21/67/26/35q58PICcu33q58PICcexzs758PIC_PIC2018.png_wh300.png',
+//           }}
+//           style={styles.locationimage}
+//         />
+//         <Text style={styles.text}>Vision Go</Text>
+//       </View>
 
-      <View style={styles.content}>
-        <View>
-          <Text style={styles.form}>Registration Form</Text>
-        </View>
-        <EditText
-          heading="Enter Your Name:-"
-          onChange={text => onChangeUserText(text)}
-          cont={userText}
-          placename="Type Your Name"
-        />
-        <EditText
-          heading="Enter Your Email"
-          onChange={Email => onChangeEmail(Email)}
-          cont={useremail}
-          placename="Type Your Email address"
-        />
-        <EditText
-          heading="Enter Your Password"
-          onChange={Passowrd => onChangePassword(Passowrd)}
-          cont={userpassword}
-          secu={true}
-          placename="Type Your Password"
-        />
-        <RoundButton
-          onPress={() =>
-            Alert.alert(
-              `Name: ${userText}, Email: ${useremail}, Password: ${userpassword}`,
-            )
-          }
-          content="Submit"
-        />
-        <View style={styles.icondesign}>
-          {/* <TouchableOpacity>
-            <Image
-              source={{
-                uri: 'https://help.twitter.com/content/dam/help-twitter/brand/logo.png',
-              }}
-              style={styles.buttonImageIconStyle}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              source={{
-                uri: 'https://parentzone.org.uk/sites/default/files/Instagram%20logo_0.jpg',
-              }}
-              style={styles.buttonImageIconStyle}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              source={{
-                uri: 'https://www.facebook.com/images/fb_icon_325x325.png',
-              }}
-              style={styles.buttonImageIconStyle}
-            />
-          </TouchableOpacity>  */}
-          <SocialIcon icon={twitter} />
-          <SocialIcon icon={insta} />
-          <SocialIcon icon={fb} />
-        </View>
-      </View>
-    </ImageBackground>
-  );
-};
+//       <View style={styles.content}>
+//         <View>
+//           <Text style={styles.form}>Registration Form</Text>
+//         </View>
+//         <EditText
+//           heading="Enter Your Name:-"
+//           onChange={text => onChangeUserText(text)}
+//           cont={userText}
+//           placename="Type Your Name"
+//         />
+//         <EditText
+//           heading="Enter Your Email"
+//           onChange={Email => onChangeEmail(Email)}
+//           cont={useremail}
+//           placename="Type Your Email address"
+//         />
+//         <EditText
+//           heading="Enter Your Password"
+//           onChange={Passowrd => onChangePassword(Passowrd)}
+//           cont={userpassword}
+//           secu={true}
+//           placename="Type Your Password"
+//         />
+//         <RoundButton
+//           onPress={() =>
+//             Alert.alert(
+//               `Name: ${userText}, Email: ${useremail}, Password: ${userpassword}`,
+//             )
+//           }
+//           content="Submit"
+//         />
+//         <View style={styles.icondesign}>
+//           <TouchableOpacity>
+//             <Image
+//               source={{
+//                 uri: 'https://help.twitter.com/content/dam/help-twitter/brand/logo.png',
+//               }}
+//               style={styles.buttonImageIconStyle}
+//             />
+//           </TouchableOpacity>
+//           <TouchableOpacity>
+//             <Image
+//               source={{
+//                 uri: 'https://parentzone.org.uk/sites/default/files/Instagram%20logo_0.jpg',
+//               }}
+//               style={styles.buttonImageIconStyle}
+//             />
+//           </TouchableOpacity>
+//           <TouchableOpacity>
+//             <Image
+//               source={{
+//                 uri: 'https://www.facebook.com/images/fb_icon_325x325.png',
+//               }}
+//               style={styles.buttonImageIconStyle}
+//             />
+//           </TouchableOpacity>
+//           {/* <SocialIcon icon={twitter} />
+//           <SocialIcon icon={insta} />
+//           <SocialIcon icon={fb} /> */}
+//         </View>
+//       </View>
+//     </ImageBackground>
+//   );
+// };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 0.3,
-    color: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  image: {
-    flex: 1,
-  },
-  content: {
-    flex: 0.7,
-    backgroundColor: 'white',
-    borderTopRightRadius: 50,
-    borderTopLeftRadius: 50,
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    // elevation: 1,
-  },
-  // border: {
-  //   fontSize: 18,
-  //   color: 'black',
-  //   fontWeight: 'bold',
-  // },
-  form: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    color: 'black',
-  },
-  // set: {
-  //   width: '90%',
-  //   // borderWidth: 1,
-  //   // borderColor: 'black',
-  //   borderBottomWidth: 1,
-  // },
-  // appButtonContainer: {
-  //   backgroundColor: 'cyan',
-  //   borderRadius: 40,
-  //   width: '40%',
-  //   height: '8%',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  // },
-  // appButtonText: {
-  //   fontSize: 12,
-  //   color: 'black',
-  //   fontWeight: 'bold',
-  // },
-  text: {
-    color: 'white',
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-  icondesign: {
-    flexDirection: 'row',
-  },
-  // buttonImageIconStyle: {
-  //   marginHorizontal: 10,
-  //   height: 25,
-  //   width: 25,
-  //   borderRadius: 10,
-  // },
-  locationimage: {
-    height: 80,
-    width: 80,
-    borderRadius: 50,
-  },
-});
-export default App;
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 0.3,
+//     color: 'white',
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+//   image: {
+//     flex: 1,
+//   },
+//   content: {
+//     flex: 0.7,
+//     backgroundColor: 'white',
+//     borderTopRightRadius: 50,
+//     borderTopLeftRadius: 50,
+//     alignItems: 'center',
+//     justifyContent: 'space-evenly',
+//     // elevation: 1,
+//   },
+//   border: {
+//     fontSize: 18,
+//     color: 'black',
+//     fontWeight: 'bold',
+//   },
+//   form: {
+//     fontSize: 25,
+//     fontWeight: 'bold',
+//     color: 'black',
+//   },
+// set: {
+//   width: '90%',
+//   // borderWidth: 1,
+//   // borderColor: 'black',
+//   borderBottomWidth: 1,
+// },
+// appButtonContainer: {
+//   backgroundColor: 'cyan',
+//   borderRadius: 40,
+//   width: '40%',
+//   height: '8%',
+//   alignItems: 'center',
+//   justifyContent: 'center',
+// },
+// appButtonText: {
+//   fontSize: 12,
+//   color: 'black',
+//   fontWeight: 'bold',
+// },
+// text: {
+//   color: 'white',
+//   fontSize: 30,
+//   fontWeight: 'bold',
+// },
+// icondesign: {
+//   flexDirection: 'row',
+// },
+// buttonImageIconStyle: {
+//   marginHorizontal: 10,
+//   height: 25,
+//   width: 25,
+//   borderRadius: 10,
+// },
+//   locationimage: {
+//     height: 80,
+//     width: 80,
+//     borderRadius: 50,
+//   },
+// });
+// export default App;
+
+// const App = () => {
+//   return (
+//     <View style={styles.container}>
+//       <FlatList
+//         // horizontal
+//         // inverted
+
+//         data={[
+//           {new: 'India'},
+//           {new: 'Austrlia'},
+//           {new: 'Nepal'},
+//           {new: 'USA'},
+//           {new: 'Uk'},
+//           {new: 'Russian Fedration'},
+//           {new: 'Serbia'},
+//           {new: 'Turkey'},
+//           {new: 'China'},
+//           {new: 'Taiwan'},
+//           {new: 'India'},
+//           {new: 'Austrlia'},
+//           {new: 'Nepal'},
+//           {new: 'USA'},
+//           {new: 'Uk'},
+//           {new: 'Russian Fedration'},
+//           {new: 'Serbia'},
+//           {new: 'Turkey'},
+//           {new: 'China'},
+//           {new: 'Taiwan'},
+//         ]}
+//         numColumns={2}
+//         renderItem={({item}) => <Text style={styles.item}>{item.new}</Text>}
+//       />
+//     </View>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     //  paddingTop: 22
+//     margin: 2,
+//     // numColumns: 2,
+//   },
+//   item: {
+//     // padding: 10,
+//     fontSize: 20,
+//     height: 90,
+//     width: 100,
+//     // numColumns: 2,
+//   },
+// });
+
+// export default App;
+
+
+
+
+
+
+
+
+
+
