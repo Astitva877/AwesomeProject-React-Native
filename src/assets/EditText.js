@@ -35,7 +35,7 @@ const EditText = props => {
       <TextInput
         onChangeText={props.onChange}
         value={props.cont}
-        secureTextEntry={props.secu} 
+        secureTextEntry={props.secu}
         placeholder={props.placename}
       />
     </View>

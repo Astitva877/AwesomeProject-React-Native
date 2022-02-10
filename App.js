@@ -1,50 +1,28 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React, {useState, Component} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  ImageBackground,
-  Text,
-  TextInput,
-  useColorScheme,
-  View,
-  Button,
-  Image,
-  Pressable,
-  Alert,
-  TouchableOpacity,
-  TextPropTypes,
-  Modal,
-  Linking,
-  FlatList,
-} from 'react-native';
+import 'react-native-gesture-handler';
+import React from 'react';
+import {Text, View, Button, TextInput, Image} from 'react-native';
 // import { CheckBoxProps} from '@react-native-community/checkbox';
-import {Icon} from 'react-native-elements';
-// import Modal from 'react-native-modal';
-import {Constants} from 'expo';
-import {
-  Colors, // jbhkjhbkj
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import {render} from 'react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod';
-import PasswordInputText from 'react-native-hide-show-password-input';
-import RoundButton from './src/assets/RoundButton';
-import EditText from './src/assets/EditText';
-import PropTypes from 'prop-types';
-import SocialIcon from './src/assets/SocialIcon'; 
+// import {Icon} from 'react-native-elements';
+// // import Modal from 'react-native-modal';
+// import {Constants} from 'expo';
+// import {
+//   Colors, // jbhkjhbkj
+//   DebugInstructions,
+//   Header,
+//   LearnMoreLinks,
+//   ReloadInstructions,
+// } from 'react-native/Libraries/NewAppScreen';
+// import {render} from 'react-native/Libraries/Renderer/implementations/ReactNativeRenderer-prod';
+// import PasswordInputText from 'react-native-hide-show-password-input';
+// import RoundButton from './src/assets/RoundButton';
+// import EditText from './src/assets/EditText';
+// import PropTypes from 'prop-types';
+// import SocialIcon from './src/assets/SocialIcon';
+// import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
 // const App = () => {
 //   const [text, onChangeText] = React.useState("Useless Text");
@@ -687,12 +665,249 @@ import {NavigationContainer} from '@react-navigation/native';
 
 // export default App;
 
+const HomeScreen = ({navigation}) => {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() =>
+          navigation.navigate('Details', {name: 'Custom Detail header'})
+        }
+      />
+      <Button
+        title="Go to Tab Bar"
+        onPress={() => navigation.navigate('TabBar', {name: 'Tab Bar header'})}
+      />
+      {/* <Button
+        title="Go to Drawer Bar"
+        onPress={() =>
+          navigation.navigate('DrawerBar', {name: 'Drawer Bar header'})
+        }
+      /> */}
+    </View>
+  );
+};
 
+const TabBarScreen = ({navigation}) => {
+  return (
+    <View style={{flex: 1}}>
+      <Text>Tab Bar Screen</Text>
+      <Tab.Navigator>
+        <Tab.Screen name="CreatePost" component={CreatePostScreen} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
+      </Tab.Navigator>
+    </View>
+  );
+};
 
+// const DrawerBarScreen = ({navigation}) => {
+//   return (
+//     <View style={{flex: 1}}>
+//       <Text> Drawer bar Screen </Text>
+//       <Drawer.Navigator>
+//         <Drawer.Screen name="Home" component={HomeScreen} />
+//         <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+//       </Drawer.Navigator>
+//     </View>
+//   );
+// };
 
+// const NotificationsScreen = ({navigation}) => {
+//   return (
+//     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+//       <Button onPress={() => navigation.goBack()} title="Go back home" />
+//     </View>
+//   );
+// };
 
+const DetailsScreen = ({navigation, route}) => {
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Details Screen</Text>
+      <Button
+        title="Go to Cricket Screen"
+        onPress={() => {
+          navigation.navigate('Cricket', {
+            itemId: 86,
+            otherParam: 'anything you want here',
+          });
+        }}
+      />
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button
+        title="Create post"
+        onPress={() => navigation.navigate('CreatePost')}
+      />
+      <Text style={{margin: 10}}>Post: {route.params?.post}</Text>
+    </View>
+  );
+};
 
+const CricketScreen = ({route, navigation}) => {
+  const {itemId, otherParam} = route.params;
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Cricket Screen</Text>
+      <Text>itemId: {JSON.stringify(itemId)}</Text>
+      <Text>otherParam: {JSON.stringify(otherParam)}</Text>
+      <Button
+        title="Cricket screen again..."
+        onPress={() =>
+          navigation.push('Cricket', {
+            itemId: Math.floor(Math.random() * 100),
+            otherParam: 'something new',
+          })
+        }
+      />
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button
+        title="Go back to first screen in stack"
+        onPress={() => navigation.popToTop()}
+      />
+      <Button
+        onPress={() =>
+          navigation.navigate('Profile', {
+            friends: ['Brent', 'Satya', 'Michaś'],
+            title: "Brent's Profile",
+          })
+        }
+        title="Go to Brent's profile"
+      />
+    </View>
+  );
+};
 
+const ProfileScreen = ({navigation, route}) => {
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Profile Screen</Text>
+      <Text>Friends: </Text>
+      <Text>{route.params.friends[0]}</Text>
+      <Text>{route.params.friends[1]}</Text>
+      <Text>{route.params.friends[2]}</Text>
+      <Button
+        onPress={() =>
+          navigation.setParams({
+            friends:
+              route.params.friends[0] === 'Brent'
+                ? ['Wojciech', 'Szymon', 'Jakub']
+                : ['Brent', 'Satya', 'Michaś'],
+            title:
+              route.params.title === "Brent's Profile"
+                ? "Lucy's Profile"
+                : "Brent's Profile",
+          })
+        }
+        title="Swap title and friends"
+      />
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      <Button
+        title="Go back to first screen in stack"
+        onPress={() => navigation.popToTop()}
+      />
+    </View>
+  );
+};
 
+const CreatePostScreen = ({navigation, route}) => {
+  const [postText, setPostText] = React.useState('');
 
+  return (
+    <>
+      <TextInput
+        multiline
+        placeholder="What's on your mind?"
+        style={{height: 200, padding: 10, backgroundColor: 'white'}}
+        value={postText}
+        onChangeText={setPostText}
+      />
+      <Button
+        title="Done"
+        onPress={() => {
+          navigation.navigate({
+            name: 'Details',
+            params: {post: postText},
+            merge: true,
+          });
+        }}
+      />
+    </>
+  );
+};
 
+const LogoTitle = () => {
+  return (
+    <Image
+      style={{width: 250, height: 40}}
+      source={{
+        uri: 'https://images.unsplash.com/photo-1558481795-7f0a7c906f5e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHVycGxlJTIwYmFja2dyb3VuZHxlbnwwfHwwfHw%3D&w=1000&q=80',
+      }}
+    />
+  );
+};
+
+const SettingsScreen = () => {
+  return (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>Settings!</Text>
+    </View>
+  );
+};
+
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+// const Drawer = createDrawerNavigator();
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{title: 'My home'}}
+        />
+        <Stack.Screen
+          name="Details"
+          component={DetailsScreen}
+          options={({route}) => ({title: route.params.name})}
+        />
+        <Stack.Screen
+          name="Cricket"
+          component={CricketScreen}
+          options={{
+            headerStyle: {
+              backgroundColor: 'wheat',
+            },
+            headerTintColor: '#fff',
+          }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={({route}) => ({title: route.params.title})}
+        />
+        <Stack.Screen
+          name="CreatePost"
+          component={CreatePostScreen}
+          options={{
+            headerTitle: props => <LogoTitle {...props} />,
+            headerRight: () => (
+              <Button
+                onPress={() => alert('This is a button!')}
+                title="Info"
+                color="#00cc00"
+              />
+            ),
+          }}
+        />
+        <Stack.Screen name="TabBar" component={TabBarScreen} />
+        {/* <Stack.Screen name="DrawerBar" component={DrawerBarScreen} /> */}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+export default App;
