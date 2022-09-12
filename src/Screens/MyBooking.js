@@ -2,13 +2,16 @@ import React from 'react';
 import {Text, View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {Icon} from '@rneui/themed';
 // import Icon from 'react-native-vector-icons/Ionicons';
-import {SearchBar} from '@rneui/themed';
+import {Input} from '@rneui/base';
+import Octicons from 'react-native-vector-icons/Octicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const MyBooking = () => {
   return (
     <View style={{flex: 1}}>
       <View
         style={{
-          flex: 0.15,
+          flex: 0.23,
           backgroundColor: 'red',
           borderBottomLeftRadius: 30,
           borderBottomRightRadius: 30,
@@ -36,24 +39,30 @@ const MyBooking = () => {
             />
           </View>
         </View>
-        <View>
-          <SearchBar
-            containerStyle={{borderColor: 'white', borderRadius: 20}}
-            lightTheme={true}
-            placeholder="Type Here..."
-            onChangeText={undefined}
+        <View style={{width: '100%', alignItems: 'center', height: '6%'}}>
+          <Input
+            containerStyle={{
+              backgroundColor: 'white',
+              width: '90%',
+              borderRadius: 30,
+            }}
+            rightIcon={<Octicons name="arrow-left" size={25} color={'black'} />}
           />
         </View>
       </View>
-      <View style={{flex: 0.85, alignItems: 'center'}}>
+      <View style={{flex: 0.77, alignItems: 'center'}}>
         <View
           style={{
             width: '90%',
-            height: '50%',
+            height: '60%',
             marginTop: '10%',
-            // backgroundColor: 'blue',
-            elevation: 1,
-            // borderRadius: 10,
+            backgroundColor: 'white',
+            elevation: 10,
+            borderRadius: 20,
+            paddingTop: 10,
+            alignItems: 'center',
+            borderWidth: 1,
+            borderColor: 'black',
           }}>
           <View style={{height: '50%', width: '100%'}}>
             <View
@@ -101,18 +110,20 @@ const MyBooking = () => {
                   flexDirection: 'row',
                   height: '50%',
                   width: '100%',
-                  justifyContent: 'space-between',
+                  justifyContent: 'space-evenly',
                   marginTop: '20%',
                 }}>
-                <View>
-                  {/* <Icon name="location" /> */}
-                  <Text> 4.5 Km </Text>
+                <View style={{flexDirection: 'row'}}>
+                  <Octicons name="location" size={20} />
+                  <Text style={styles.textSize}> 4.5 Km </Text>
                 </View>
-                <View>
-                  <Text> 4 mins </Text>
+                <View style={{flexDirection: 'row'}}>
+                  <Octicons name="clock" size={20} />
+                  <Text style={styles.textSize}> 4 mins </Text>
                 </View>
-                <View>
-                  <Text> $7.00 </Text>
+                <View style={{flexDirection: 'row'}}>
+                  <MaterialCommunityIcons name="cash" size={20} />
+                  <Text style={styles.textSize}> $7.00 </Text>
                 </View>
               </View>
               <View
@@ -120,12 +131,18 @@ const MyBooking = () => {
                   flexDirection: 'row',
                   height: '40%',
                   width: '100%',
-                  justifyContent: 'space-between',
+                  justifyContent: 'space-evenly',
                 }}>
-                <Text> Date & Time </Text>
-                <Text> Dec,20 2022 | 10:00 AM </Text>
+                <Text style={styles.textSize}> Date & Time </Text>
+                <Text style={styles.textSize}> Dec,20 2022 | 10:00 AM </Text>
               </View>
-              <View style={{height: '50%', width: '100%'}}>
+              <View
+                style={{
+                  height: '80%',
+                  width: '100%',
+                  alignItems: 'center',
+                  marginTop: 10,
+                }}>
                 <View
                   style={{
                     flexDirection: 'row',
@@ -134,13 +151,13 @@ const MyBooking = () => {
                     width: '100%',
                     alignItems: 'center',
                   }}>
-                  <Image
-                    style={{height: '100%', width: '45%', borderRadius: 30}}
-                    resizeMode="contain"
-                    source={require('../assets/address.png')}
+                  <MaterialIcons
+                    name={'my-location'}
+                    size={28}
+                    color={'yellow'}
                   />
-                  <View>
-                    <Text> Pickup Address </Text>
+                  <View style={{marginRight: 28}}>
+                    <Text style={{color: 'black'}}>Pickup Address </Text>
                     <Text style={{fontSize: 10}}>35, Oak, Antive TN 37013</Text>
                   </View>
                 </View>
@@ -153,17 +170,24 @@ const MyBooking = () => {
                     alignItems: 'center',
                     marginTop: '10%',
                   }}>
-                  <Image
-                    style={{height: '100%', width: '45%', borderRadius: 30}}
-                    resizeMode="contain"
-                    source={require('../assets/yellow.png')}
+                  <MaterialIcons
+                    name={'location-on'}
+                    size={28}
+                    color={'yellow'}
                   />
                   <View>
-                    <Text> Destination Address </Text>
+                    <Text style={{color: 'black'}}>Destination Address </Text>
                     <Text style={{fontSize: 10}}>
                       25, State, St. Dolphine TN 37013
                     </Text>
                   </View>
+                </View>
+                <View style={{marginTop: 10}}>
+                  <MaterialCommunityIcons
+                    name={'chevron-up'}
+                    size={25}
+                    color={'black'}
+                  />
                 </View>
               </View>
             </View>
@@ -195,4 +219,5 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
   },
+  textSize: {fontSize: 15},
 });
